@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './App.css';
+import Nav from './Component/Nav';
+// import { Outlet } from 'react-router-dom' // Part of Nested Route Required
 
 function App() {
+  const [api, setApi] = useState([])
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users/')
+      .then(response => response.json())
+      .then(json => {
+        console.log(json)
+        setApi(json)
+      })
+
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+
+      <Nav />
+      <h6>test</h6>
+      {api.map((ele, i) => {
+        return (
+          <Link key={i} to={`/detail/${ele.id}`}>{ele.name}
+            <br />Username: {ele.username}
+            <br /></Link>
+        )
+      })}
+
+      {/* <Outlet></Outlet>  part of nested route Required */}
     </div>
   );
 }

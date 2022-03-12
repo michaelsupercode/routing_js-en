@@ -4,10 +4,27 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Gallery from './Component/gal';
+import Detail from './Component/detail';
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <React.StrictMode>
+      <Routes>
+
+        {/*     nested Route 
+        <Route path="/" element={<App />} >
+          <Route path="gal" element={<Gallery />} />
+        </Route>
+*/}
+        <Route path="/" element={<App />} />
+        <Route path="/gal" element={<Gallery />} />
+        <Route path="/detail/:id" element={<Detail />} />
+
+      </Routes>
+    </React.StrictMode>
+  </BrowserRouter >,
   document.getElementById('root')
 );
 
